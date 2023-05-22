@@ -2,6 +2,7 @@
 import './style.css';
 import Fish from './Fish.js';
 import castBtn from './Game.js';
+import reelBtn from './Game.js';
 import Timer from './Rod.js';
 import './Timer.js';
 import Meter from './Ui.js';
