@@ -6,6 +6,7 @@ import Timer from './Timer.js';
 import Meter from './Ui.js';
 
 // Global Variables
+
 // list of fish
 const goldFish = new Fish('Goldfish', 1, 10);
 const perch = new Fish('Perch', 3, 30);
@@ -17,11 +18,16 @@ const pike = new Fish('Pike', 8, 50);
 const salmon = new Fish('Salmon', 8, 70);
 const shark = new Fish('Shark', 9, 100);
 
+// buttons
 const castBtn = document.createElement('button');
 const reelBtn = document.createElement('button');
+
+// bind new functions
 const biteTimer = new Timer();
+const poorRod = new Rod(0, 0, 10);
 
 // bind events
+
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
   const cast = poorRod.cast();
@@ -39,6 +45,7 @@ reelBtn.addEventListener('mousedown', () => {
   console.log('reeling in!');
 });
 
+// event listener that alters the tension and distance of the meters when letting go of the mouse click
 reelBtn.addEventListener('mouseup', () => {});
 
 reelBtn.disabled = true;
@@ -54,5 +61,4 @@ const tensionMeter = new Meter({
   fgColor: 'blue',
 });
 
-const poorRod = new Rod(0, 0, 10);
 document.body.append(tensionMeter.view);
