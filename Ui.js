@@ -3,11 +3,13 @@ export default function Meter({
   fgColor = 'blue',
   barHeight = 50,
   barWidth = 100,
+  position,
 }) {
   this.bgColor = bgColor;
   this.fgColor = fgColor;
   this.barHeight = barHeight;
   this.barWidth = barWidth;
+  this.position = position;
   this.view;
   this.fg;
   this.create();
@@ -26,6 +28,7 @@ Meter.prototype.create = function () {
   this.changeBgColor(this.bgColor);
   this.changeBgWidth(this.barWidth);
   this.changeBgHeight(this.barHeight);
+  this.changePosition(this.position);
 
   //fg (foreground) elements
   this.changeFgColor(this.fgColor);
@@ -57,4 +60,11 @@ Meter.prototype.changeFgWidth = function (barWidth) {
 
 Meter.prototype.changeFgHeight = function (barHeight) {
   this.fg.style.height = barHeight + 'px';
+};
+
+Meter.prototype.changePosition = function (position) {
+  this.view.style.flex = position;
+  this.view.style.flexDirection = position;
+  this.view.style.justifyContent = position;
+  this.view.style.alignItems = position;
 };

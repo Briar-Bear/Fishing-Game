@@ -36,6 +36,7 @@ const distanceMeter = new Meter({
   barWidth: 50,
   barHeight: 250,
   fgColor: 'black',
+  position: 50,
 });
 
 // bind events
