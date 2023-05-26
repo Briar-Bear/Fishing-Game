@@ -26,6 +26,18 @@ const reelBtn = document.createElement('button');
 const biteTimer = new Timer();
 const poorRod = new Rod(0, 0, 10);
 
+const tensionMeter = new Meter({
+  barWidth: 50,
+  barHeight: 250,
+  fgColor: 'blue',
+});
+
+const distanceMeter = new Meter({
+  barWidth: 50,
+  barHeight: 250,
+  fgColor: 'black',
+});
+
 // bind events
 
 // event listeners to cast out the line
@@ -53,12 +65,4 @@ reelBtn.disabled = true;
 castBtn.textContent = 'Cast Line';
 reelBtn.textContent = 'Reel In';
 
-document.body.append(castBtn, reelBtn);
-
-const tensionMeter = new Meter({
-  barWidth: 50,
-  barHeight: 250,
-  fgColor: 'blue',
-});
-
-document.body.append(tensionMeter.view);
+document.body.append(castBtn, reelBtn, tensionMeter.view, distanceMeter.view);
