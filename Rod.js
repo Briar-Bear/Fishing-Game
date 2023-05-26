@@ -3,7 +3,7 @@ export default function Rod(tension, distance, range) {
   this.tension = tension;
   this.distance = distance;
   this.range = range;
-  this.timer = new Timer();
+  // this.timer = new Timer();
 }
 
 Rod.prototype.randomNumber = function (max) {
