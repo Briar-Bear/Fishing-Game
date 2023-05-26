@@ -1,23 +1,11 @@
 // Import stylesheets
 import './style.css';
 import Fish from './Fish.js';
-import castBtn from './Game.js';
-import reelBtn from './Game.js';
-import Timer from './Rod.js';
-import './Timer.js';
+import Rod from './Rod.js';
+import Timer from './Timer.js';
 import Meter from './Ui.js';
 
 // Global Variables
-const castBtn = document.createElement('button');
-const reelBtn = document.createElement('button');
-
-reelBtn.disabled = true;
-
-castBtn.textContent = 'Cast Line';
-reelBtn.textContent = 'Reel In';
-
-document.body.append(castBtn, reelBtn);
-
 // list of fish
 const goldFish = new Fish('Goldfish', 1, 10);
 const perch = new Fish('Perch', 3, 30);
@@ -28,3 +16,43 @@ const trout = new Fish('Trout', 7, 40);
 const pike = new Fish('Pike', 8, 50);
 const salmon = new Fish('Salmon', 8, 70);
 const shark = new Fish('Shark', 9, 100);
+
+const castBtn = document.createElement('button');
+const reelBtn = document.createElement('button');
+const biteTimer = new Timer();
+
+// bind events
+// event listeners to cast out the line
+castBtn.addEventListener('click', () => {
+  const cast = poorRod.cast();
+
+  if (cast > 1) {
+    biteTimer.start();
+    console.log('You cast your line out ' + cast + 'm');
+  } else {
+    console.log('Try again');
+  }
+});
+
+// event listeners to reel in the fish
+reelBtn.addEventListener('mousedown', () => {
+  console.log('reeling in!');
+});
+
+reelBtn.addEventListener('mouseup', () => {});
+
+reelBtn.disabled = true;
+
+castBtn.textContent = 'Cast Line';
+reelBtn.textContent = 'Reel In';
+
+document.body.append(castBtn, reelBtn);
+
+const tensionMeter = new Meter({
+  barWidth: 50,
+  barHeight: 250,
+  fgColor: 'blue',
+});
+
+const poorRod = new Rod(0, 0, 10);
+document.body.append(tensionMeter.view);
