@@ -63,8 +63,7 @@ Meter.prototype.changeFgHeight = function (barHeight) {
 };
 
 Meter.prototype.changePosition = function (position) {
-  this.view.style.flex = position;
-  this.view.style.flexDirection = position;
-  this.view.style.justifyContent = position;
-  this.view.style.alignItems = position;
-};
+  if (position === 'left') {
+    this.view.style.transform = 'translate(100px) rotate(90deg)'
+  }
+}

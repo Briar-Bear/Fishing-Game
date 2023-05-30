@@ -23,7 +23,18 @@ const castBtn = document.createElement('button');
 const reelBtn = document.createElement('button');
 
 // bind new functions
-const biteTimer = new Timer();
+const biteTimer = new Timer(() => {
+  const number = Math.floor(Math.random() * 5);
+
+  if (number) {
+    console.log('start');
+    reelBtn.disabled = false;
+    biteTimer.stop();
+  } else {
+    console.log('Still Working!');
+  }
+}, 1000);
+
 const poorRod = new Rod(0, 0, 10);
 
 const tensionMeter = new Meter({
@@ -31,6 +42,8 @@ const tensionMeter = new Meter({
   barHeight: 250,
   fgColor: 'blue',
 });
+
+tensionMeter.changePosition('left');
 
 const distanceMeter = new Meter({
   barWidth: 50,
