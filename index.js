@@ -23,20 +23,6 @@ const castBtn = document.createElement('button');
 const reelBtn = document.createElement('button');
 
 // bind new functions
-const biteTimer = new Timer(() => {
-  const number = Math.floor(Math.random() * 5);
-
-  if (number) {
-    console.log('start');
-    reelBtn.disabled = false;
-    biteTimer.stop();
-  } else {
-    console.log('Still Working!');
-  }
-}, 1000);
-
-const poorRod = new Rod(0, 0, 10);
-
 const tensionMeter = new Meter({
   barWidth: 50,
   barHeight: 250,
@@ -52,7 +38,20 @@ const distanceMeter = new Meter({
   position: 50,
 });
 
-// bind events
+// timer function
+const biteTimer = new Timer(() => {
+  const number = Math.floor(Math.random() * 5);
+
+  if (number) {
+    console.log('start');
+    reelBtn.disabled = false;
+    biteTimer.stop();
+  } else {
+    console.log('Still Working!');
+  }
+}, 1000);
+
+const poorRod = new Rod(0, 0, 10);
 
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
