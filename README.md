@@ -5,8 +5,8 @@
 ## Settings
 
 - Difficulty
-- Update time iterval for distance
-- Update time iterval for tension
+- Update time interval for distance
+- Update time interval for tension
 
 ## Cast line
 
