@@ -38,7 +38,7 @@ const distanceMeter = new Meter({
   position: 50,
 });
 
-// timer function
+// timer functions
 const biteTimer = new Timer(() => {
   const number = Math.floor(Math.random() * 5);
 
@@ -50,6 +50,15 @@ const biteTimer = new Timer(() => {
     console.log('Still Working!');
   }
 }, 1000);
+
+// can't adjust the values of changeFgHeight to increase/decrease everytime i click reel in
+const tensionTimer = new Timer(() => {
+  console.log('tensiontimer working');
+  tensionMeter.changeFgHeight(+10);
+  tensionTimer.stop();
+}, 1000);
+
+const distanceTimer = new Timer(() => {}, 1000);
 
 const poorRod = new Rod(0, 0, 10);
 
@@ -67,6 +76,7 @@ castBtn.addEventListener('click', () => {
 
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
+  tensionTimer.start();
   console.log('reeling in!');
 });
 
