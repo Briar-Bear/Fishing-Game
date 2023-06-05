@@ -29,16 +29,35 @@ const tensionMeter = new Meter({
   fgColor: 'blue',
 });
 
-tensionMeter.changePosition('left');
-
 const distanceMeter = new Meter({
   barWidth: 50,
   barHeight: 250,
-  fgColor: 'black',
+  fgColor: 'Green',
   position: 50,
 });
 
+distanceMeter.changePosition('left');
+
 // timer functions
+
+const distanceTimer = new Timer(() => {
+  distanceMeter.changeLength(10);
+
+  if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
+    distanceTimer.stop();
+  }
+}, 1000);
+
+// can't adjust the values of changeFgHeight to increase/decrease everytime i click reel in
+const tensionTimer = new Timer(() => {
+  console.log('tensiontimer working');
+  tensionMeter.changeLength(10);
+
+  if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
+    tensionTimer.stop();
+  }
+}, 1000);
+
 const biteTimer = new Timer(() => {
   const number = Math.floor(Math.random() * 5);
 
@@ -50,15 +69,6 @@ const biteTimer = new Timer(() => {
     console.log('Still Working!');
   }
 }, 1000);
-
-// can't adjust the values of changeFgHeight to increase/decrease everytime i click reel in
-const tensionTimer = new Timer(() => {
-  console.log('tensiontimer working');
-  tensionMeter.changeFgHeight(+10);
-  tensionTimer.stop();
-}, 1000);
-
-const distanceTimer = new Timer(() => {}, 1000);
 
 const poorRod = new Rod(0, 0, 10);
 
@@ -77,6 +87,7 @@ castBtn.addEventListener('click', () => {
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
   tensionTimer.start();
+  distanceTimer.start();
   console.log('reeling in!');
 });
 
