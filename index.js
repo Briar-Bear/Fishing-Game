@@ -46,7 +46,7 @@ const distanceTimer = new Timer(() => {
   if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
     distanceTimer.stop();
   }
-}, 1000);
+}, 500);
 
 // can't adjust the values of changeFgHeight to increase/decrease everytime i click reel in
 const tensionTimer = new Timer(() => {
@@ -56,7 +56,7 @@ const tensionTimer = new Timer(() => {
   if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
     tensionTimer.stop();
   }
-}, 1000);
+}, 500);
 
 const biteTimer = new Timer(() => {
   const number = Math.floor(Math.random() * 5);
@@ -92,7 +92,17 @@ reelBtn.addEventListener('mousedown', () => {
 });
 
 // event listener that alters the tension and distance of the meters when letting go of the mouse click
-reelBtn.addEventListener('mouseup', () => {});
+reelBtn.addEventListener('mouseup', () => {
+  tensionMeter.changeLength(-5);
+  distanceMeter.changeLength(-5);
+  if (tensionMeter.fgHeight <= tensionMeter.bgHeight) {
+    tensionTimer.stop();
+  }
+
+  if (distanceMeter.fgHeight <= distanceMeter.bgHeight) {
+    distanceTimer.stop();
+  }
+});
 
 reelBtn.disabled = true;
 
