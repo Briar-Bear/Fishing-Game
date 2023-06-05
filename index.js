@@ -46,6 +46,7 @@ const distanceTimer = new Timer(() => {
 
   if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
     distanceTimer.stop();
+    console.log('You caught a fish!');
   }
 }, 500);
 
@@ -55,6 +56,7 @@ const distanceTimerDecrement = new Timer(() => {
 
   if (distanceMeter.fgHeight <= 0) {
     distanceTimerDecrement.stop();
+    console.log('Fish has got away!');
   }
 }, 500);
 
@@ -64,6 +66,7 @@ const tensionTimer = new Timer(() => {
 
   if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
     tensionTimer.stop();
+    console.log('Line has Snapped');
   }
 }, 500);
 
