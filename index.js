@@ -40,6 +40,7 @@ distanceMeter.changePosition('left');
 
 // timer functions
 
+// a timer to increase the progress bar of the distanceMeter
 const distanceTimer = new Timer(() => {
   distanceMeter.changeLength(10);
 
@@ -48,13 +49,31 @@ const distanceTimer = new Timer(() => {
   }
 }, 500);
 
-// can't adjust the values of changeFgHeight to increase/decrease everytime i click reel in
+// a timer to reduce the progress bar of the distanceMeter
+const distanceTimerDecrement = new Timer(() => {
+  distanceMeter.changeLength(-5);
+
+  if (distanceMeter.fgHeight <= 0) {
+    distanceTimerDecrement.stop();
+  }
+}, 500);
+
+// a timer to increase the progress bar of the tensionMeter
 const tensionTimer = new Timer(() => {
   console.log('tensiontimer working');
   tensionMeter.changeLength(10);
 
   if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
     tensionTimer.stop();
+  }
+}, 500);
+
+// a timer to reduce the progress bar of the tensionMeter
+const tensionTimerDecrement = new Timer(() => {
+  tensionMeter.changeLength(-5);
+
+  if (tensionMeter.fgHeight <= 0) {
+    tensionTimerDecrement.stop();
   }
 }, 500);
 
@@ -93,15 +112,11 @@ reelBtn.addEventListener('mousedown', () => {
 
 // event listener that alters the tension and distance of the meters when letting go of the mouse click
 reelBtn.addEventListener('mouseup', () => {
-  tensionMeter.changeLength(-5);
-  distanceMeter.changeLength(-5);
-  if (tensionMeter.fgHeight <= tensionMeter.bgHeight) {
-    tensionTimer.stop();
-  }
+  distanceTimer.stop();
+  tensionTimer.stop();
 
-  if (distanceMeter.fgHeight <= distanceMeter.bgHeight) {
-    distanceTimer.stop();
-  }
+  tensionTimerDecrement.start();
+  distanceTimerDecrement.start();
 });
 
 reelBtn.disabled = true;
