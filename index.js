@@ -60,7 +60,6 @@ const distanceTimerDecrement = new Timer(() => {
 
 // a timer to increase the progress bar of the tensionMeter
 const tensionTimer = new Timer(() => {
-  console.log('tensiontimer working');
   tensionMeter.changeLength(10);
 
   if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
