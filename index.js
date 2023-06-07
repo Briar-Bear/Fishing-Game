@@ -7,16 +7,30 @@ import Meter from './Ui.js';
 
 // Global Variables
 
-// list of fish
-const goldFish = new Fish('Goldfish', 1, 10);
-const perch = new Fish('Perch', 3, 30);
-const guppy = new Fish('Guppy', 4, 20);
-const carp = new Fish('Carp', 6, 30);
-const bass = new Fish('Bass', 6, 60);
-const trout = new Fish('Trout', 7, 40);
-const pike = new Fish('Pike', 8, 50);
-const salmon = new Fish('Salmon', 8, 70);
-const shark = new Fish('Shark', 9, 100);
+// all fish data
+const fishData = [
+  ['Goldfish', 1, 10],
+  ['Perch', 3, 30],
+  ['Guppy', 4, 20],
+  ['Carp', 6, 30],
+  ['Bass', 6, 60],
+  ['Trout', 7, 40],
+  ['Pike', 8, 50],
+  ['Salmon', 8, 70],
+  ['Shark', 9, 100],
+];
+
+const fishes = [];
+
+for (let i = 0; i < fishData.length; i++) {
+  const item = fishData[i];
+
+  fishes.push(new Fish(...item));
+}
+
+function getFish(fishes) {
+  return fishes[Math.floor(Math.random() * fishes.length)];
+}
 
 // buttons
 const castBtn = document.createElement('button');
@@ -86,6 +100,8 @@ const biteTimer = new Timer(() => {
     console.log('start');
     reelBtn.disabled = false;
     biteTimer.stop();
+    const fish = getFish(fishes);
+    console.log(fish);
   } else {
     console.log('Still Working!');
   }
