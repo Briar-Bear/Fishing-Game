@@ -60,7 +60,7 @@ const distanceTimer = new Timer(() => {
 
   if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
     distanceTimer.stop();
-    console.log('You caught a fish!');
+    console.log('You caught a ' + getFish(fishes));
   }
 }, 500);
 
@@ -102,40 +102,40 @@ const biteTimer = new Timer(() => {
     biteTimer.stop();
     const fish = getFish(fishes);
     console.log(fish);
+
+    // event listeners to cast out the line
+    castBtn.addEventListener('click', () => {
+      const cast = poorRod.cast();
+
+      if (cast > 1) {
+        biteTimer.start();
+        console.log('You cast your line out ' + cast + 'm');
+      } else {
+        console.log('Try again');
+      }
+    });
+
+    // event listeners to reel in the fish
+    reelBtn.addEventListener('mousedown', () => {
+      tensionTimer.start();
+      distanceTimer.start();
+      console.log('reeling in!');
+    });
+
+    // event listener that alters the tension and distance of the meters when letting go of the mouse click
+    reelBtn.addEventListener('mouseup', () => {
+      distanceTimer.stop();
+      tensionTimer.stop();
+
+      tensionTimerDecrement.start();
+      distanceTimerDecrement.start();
+    });
   } else {
     console.log('Still Working!');
   }
 }, 1000);
 
 const poorRod = new Rod(0, 0, 10);
-
-// event listeners to cast out the line
-castBtn.addEventListener('click', () => {
-  const cast = poorRod.cast();
-
-  if (cast > 1) {
-    biteTimer.start();
-    console.log('You cast your line out ' + cast + 'm');
-  } else {
-    console.log('Try again');
-  }
-});
-
-// event listeners to reel in the fish
-reelBtn.addEventListener('mousedown', () => {
-  tensionTimer.start();
-  distanceTimer.start();
-  console.log('reeling in!');
-});
-
-// event listener that alters the tension and distance of the meters when letting go of the mouse click
-reelBtn.addEventListener('mouseup', () => {
-  distanceTimer.stop();
-  tensionTimer.stop();
-
-  tensionTimerDecrement.start();
-  distanceTimerDecrement.start();
-});
 
 reelBtn.disabled = true;
 
