@@ -103,18 +103,6 @@ const biteTimer = new Timer(() => {
     const fish = getFish(fishes);
     console.log(fish);
 
-    // event listeners to cast out the line
-    castBtn.addEventListener('click', () => {
-      const cast = poorRod.cast();
-
-      if (cast > 1) {
-        biteTimer.start();
-        console.log('You cast your line out ' + cast + 'm');
-      } else {
-        console.log('Try again');
-      }
-    });
-
     // event listeners to reel in the fish
     reelBtn.addEventListener('mousedown', () => {
       tensionTimer.start();
@@ -134,6 +122,18 @@ const biteTimer = new Timer(() => {
     console.log('Still Working!');
   }
 }, 1000);
+
+// event listeners to cast out the line
+castBtn.addEventListener('click', () => {
+  const cast = poorRod.cast();
+
+  if (cast > 1) {
+    biteTimer.start();
+    console.log('You cast your line out ' + cast + 'm');
+  } else {
+    console.log('Try again');
+  }
+});
 
 const poorRod = new Rod(0, 0, 10);
 
