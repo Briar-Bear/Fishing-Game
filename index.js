@@ -110,7 +110,7 @@ distanceMeter.changePosition('left');
 
 // a timer to increase the progress bar of the distanceMeter
 const distanceTimer = new Timer(({ castDistance, fishName }) => {
-  distanceMeter.changeLength(castDistance);
+  distanceMeter.changeLength(castDistance * 2);
 
   if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
     distanceTimer.stop();
