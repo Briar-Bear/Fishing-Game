@@ -147,12 +147,14 @@ const tensionTimerDecrement = new Timer((fishStrength) => {
   }
 }, 500);
 
-const biteTimer = new Timer((castDistance) => {
-  const range = Math.floor(Math.random() * castDistance);
+const biteTimer = new Timer((rodDistance) => {
+  const castDistance = Math.floor(Math.random() * rodDistance);
 
-  if (range) {
+  if (castDistance) {
     console.log('start');
     reelBtn.disabled = false;
+    castBtn.disabled = true;
+
     biteTimer.stop();
 
     const fish = getFish(fishes);
@@ -164,7 +166,7 @@ const biteTimer = new Timer((castDistance) => {
       distanceTimerDecrement.stop();
 
       tensionTimer.start(fish.strength);
-      distanceTimer.start({ castDistance: range, fishName: fish.name });
+      distanceTimer.start({ castDistance, fishName: fish.name });
       console.log('reeling in!');
     });
 
