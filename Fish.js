@@ -1,5 +1,5 @@
 // fish function and prototypes
-export default function Fish(name, strength, points) {
+export default function Fish({ name, strength, points }) {
   this.name = name;
   this.strength = strength;
   this.points = points;

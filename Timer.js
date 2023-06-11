@@ -5,8 +5,10 @@ export default function Timer(callback, duration) {
   this.id;
 }
 
-Timer.prototype.start = function () {
-  this.id = setInterval(this.callback, this.duration);
+Timer.prototype.start = function (args) {
+  this.id = setInterval(() => {
+    this.callback(args);
+  }, this.duration);
 };
 
 Timer.prototype.stop = function () {

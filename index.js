@@ -9,15 +9,69 @@ import Meter from './Ui.js';
 
 // all fish data
 const fishData = [
-  ['Goldfish', 1, 10],
-  ['Perch', 3, 30],
-  ['Guppy', 4, 20],
-  ['Carp', 6, 30],
-  ['Bass', 6, 60],
-  ['Trout', 7, 40],
-  ['Pike', 8, 50],
-  ['Salmon', 8, 70],
-  ['Shark', 9, 100],
+  [
+    {
+      name: 'Goldfish',
+      strength: 1,
+      points: 10,
+    },
+  ],
+  [
+    {
+      name: 'Perch',
+      strength: 3,
+      points: 30,
+    },
+  ],
+  [
+    {
+      name: 'Guppy',
+      strength: 4,
+      points: 20,
+    },
+  ],
+  [
+    {
+      name: 'Carp',
+      strength: 6,
+      points: 30,
+    },
+  ],
+  [
+    {
+      name: 'Bass',
+      strength: 6,
+      points: 60,
+    },
+  ],
+  [
+    {
+      name: 'Trout',
+      strength: 7,
+      points: 40,
+    },
+  ],
+  [
+    {
+      name: 'Pike',
+      strength: 8,
+      points: 50,
+    },
+  ],
+  [
+    {
+      name: 'Salmon',
+      strength: 8,
+      points: 70,
+    },
+  ],
+  [
+    {
+      name: 'Shark',
+      strength: 9,
+      points: 100,
+    },
+  ],
 ];
 
 const fishes = [];
@@ -55,18 +109,18 @@ distanceMeter.changePosition('left');
 // timer functions
 
 // a timer to increase the progress bar of the distanceMeter
-const distanceTimer = new Timer(() => {
-  distanceMeter.changeLength(10);
+const distanceTimer = new Timer(({ castDistance, fishName }) => {
+  distanceMeter.changeLength(castDistance);
 
   if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
     distanceTimer.stop();
-    console.log('You caught a ' + getFish(fishes));
+    console.log('You caught a ' + fishName);
   }
 }, 500);
 
 // a timer to reduce the progress bar of the distanceMeter
-const distanceTimerDecrement = new Timer(() => {
-  distanceMeter.changeLength(-5);
+const distanceTimerDecrement = new Timer((castDistance) => {
+  distanceMeter.changeLength(-castDistance);
 
   if (distanceMeter.fgHeight <= 0) {
     distanceTimerDecrement.stop();
@@ -75,8 +129,8 @@ const distanceTimerDecrement = new Timer(() => {
 }, 500);
 
 // a timer to increase the progress bar of the tensionMeter
-const tensionTimer = new Timer(() => {
-  tensionMeter.changeLength(10);
+const tensionTimer = new Timer((fishStrength) => {
+  tensionMeter.changeLength(fishStrength);
 
   if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
     tensionTimer.stop();
@@ -85,28 +139,32 @@ const tensionTimer = new Timer(() => {
 }, 500);
 
 // a timer to reduce the progress bar of the tensionMeter
-const tensionTimerDecrement = new Timer(() => {
-  tensionMeter.changeLength(-5);
+const tensionTimerDecrement = new Timer((fishStrength) => {
+  tensionMeter.changeLength(-fishStrength);
 
   if (tensionMeter.fgHeight <= 0) {
     tensionTimerDecrement.stop();
   }
 }, 500);
 
-const biteTimer = new Timer(() => {
-  const number = Math.floor(Math.random() * 5);
+const biteTimer = new Timer((castDistance) => {
+  const range = Math.floor(Math.random() * castDistance);
 
-  if (number) {
+  if (range) {
     console.log('start');
     reelBtn.disabled = false;
     biteTimer.stop();
+
     const fish = getFish(fishes);
     console.log(fish);
 
     // event listeners to reel in the fish
     reelBtn.addEventListener('mousedown', () => {
-      tensionTimer.start();
-      distanceTimer.start();
+      tensionTimerDecrement.stop();
+      distanceTimerDecrement.stop();
+
+      tensionTimer.start(fish.strength);
+      distanceTimer.start({ castDistance: range, fishName: fish.name });
       console.log('reeling in!');
     });
 
@@ -115,8 +173,8 @@ const biteTimer = new Timer(() => {
       distanceTimer.stop();
       tensionTimer.stop();
 
-      tensionTimerDecrement.start();
-      distanceTimerDecrement.start();
+      tensionTimerDecrement.start(fish.strength);
+      distanceTimerDecrement.start(castDistance);
     });
   } else {
     console.log('Still Working!');
@@ -128,7 +186,7 @@ castBtn.addEventListener('click', () => {
   const cast = poorRod.cast();
 
   if (cast > 1) {
-    biteTimer.start();
+    biteTimer.start(cast);
     console.log('You cast your line out ' + cast + 'm');
   } else {
     console.log('Try again');
