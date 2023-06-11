@@ -149,7 +149,7 @@ const tensionTimer = new Timer((fishStrength) => {
 
 // a timer to reduce the progress bar of the tensionMeter
 const tensionTimerDecrement = new Timer((fishStrength) => {
-  tensionMeter.changeLength(-fishStrength);
+  tensionMeter.changeLength(-fishStrength * 2);
 
   if (tensionMeter.fgHeight <= 0) {
     tensionTimerDecrement.stop();
