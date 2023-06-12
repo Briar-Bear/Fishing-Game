@@ -112,7 +112,10 @@ distanceMeter.changePosition('left');
 const distanceTimer = new Timer(({ castDistance, fishName }) => {
   distanceMeter.changeLength(castDistance * 2);
 
-  if (distanceMeter.fgHeight >= distanceMeter.bgHeight) {
+  if (
+    distanceMeter.fgHeight >= distanceMeter.bgHeight ||
+    tensionMeter.fgHeight >= tensionMeter.bgHeight
+  ) {
     distanceTimer.stop();
     console.log('You caught a ' + fishName);
 
@@ -138,7 +141,10 @@ const distanceTimerDecrement = new Timer((castDistance) => {
 const tensionTimer = new Timer((fishStrength) => {
   tensionMeter.changeLength(fishStrength);
 
-  if (tensionMeter.fgHeight >= tensionMeter.bgHeight) {
+  if (
+    tensionMeter.fgHeight >= tensionMeter.bgHeight ||
+    distanceMeter.fgHeight >= distanceMeter.bgHeight
+  ) {
     tensionTimer.stop();
     console.log('Line has Snapped');
 
