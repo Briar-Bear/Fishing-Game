@@ -1,3 +1,6 @@
+// reset tension meter back to 0 when fish got away
+// something wrong on line 225
+
 // Import stylesheets
 import './style.css';
 import Fish from './Fish.js';
@@ -6,6 +9,16 @@ import Timer from './Timer.js';
 import Meter from './Ui.js';
 
 // Global Variables
+
+const game = {
+  currentFish: null,
+  castDistance: 0,
+  fish: [],
+  rod: [],
+  getFish() {
+    this.currentFish = this.fish[Math.floor(Math.random() * this.fish.length)];
+  },
+};
 
 // all fish data
 const fishData = [
@@ -74,16 +87,44 @@ const fishData = [
   ],
 ];
 
-const fishes = [];
-
 for (let i = 0; i < fishData.length; i++) {
   const item = fishData[i];
 
-  fishes.push(new Fish(...item));
+  game.fish.push(new Fish(...item));
 }
 
-function getFish(fishes) {
-  return fishes[Math.floor(Math.random() * fishes.length)];
+// all rod data
+const rodData = [
+  [
+    {
+      name: 'Poor Rod',
+      tension: 0,
+      distance: 0,
+      range: 10,
+    },
+  ],
+  [
+    {
+      name: 'Good Rod',
+      tension: 0,
+      distance: 0,
+      range: 10,
+    },
+  ],
+  [
+    {
+      name: 'Great Rod',
+      tension: 0,
+      distance: 0,
+      range: 10,
+    },
+  ],
+];
+
+for (let i = 0; i < rodData.length; i++) {
+  const rodItem = rodData[i];
+
+  game.rod.push(new Rod(...rodItem));
 }
 
 // buttons
@@ -172,27 +213,9 @@ const biteTimer = new Timer((rodDistance) => {
 
     biteTimer.stop();
 
-    const fish = getFish(fishes);
-    console.log(fish);
-
-    // event listeners to reel in the fish
-    reelBtn.addEventListener('mousedown', () => {
-      tensionTimerDecrement.stop();
-      distanceTimerDecrement.stop();
-
-      tensionTimer.start(fish.strength);
-      distanceTimer.start({ castDistance, fishName: fish.name });
-      console.log('reeling in!');
-    });
-
-    // event listener that alters the tension and distance of the meters when letting go of the mouse click
-    reelBtn.addEventListener('mouseup', () => {
-      distanceTimer.stop();
-      tensionTimer.stop();
-
-      tensionTimerDecrement.start(fish.strength);
-      distanceTimerDecrement.start(castDistance);
-    });
+    game.getFish();
+    game.castDistance = castDistance;
+    console.log(game.currentFish);
   } else {
     console.log('Still Working!');
   }
@@ -200,7 +223,7 @@ const biteTimer = new Timer((rodDistance) => {
 
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
-  const cast = poorRod.cast();
+  const cast = game.rod.name.cast();
 
   if (cast > 1) {
     biteTimer.start(cast);
@@ -210,7 +233,24 @@ castBtn.addEventListener('click', () => {
   }
 });
 
-const poorRod = new Rod(0, 0, 10);
+// event listeners to reel in the fish
+reelBtn.addEventListener('mousedown', () => {
+  tensionTimerDecrement.stop();
+  distanceTimerDecrement.stop();
+
+  tensionTimer.start(game.currentFish.strength);
+  distanceTimer.start({ castDistance, fishName: game.currentFish.name });
+  console.log('reeling in!');
+});
+
+// event listener that alters the tension and distance of the meters when letting go of the mouse click
+reelBtn.addEventListener('mouseup', () => {
+  distanceTimer.stop();
+  tensionTimer.stop();
+
+  tensionTimerDecrement.start(game.currentFish.strength);
+  distanceTimerDecrement.start(game.castDistance);
+});
 
 reelBtn.disabled = true;
 
