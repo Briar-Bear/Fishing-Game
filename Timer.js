@@ -12,5 +12,7 @@ Timer.prototype.start = function (args) {
 };
 
 Timer.prototype.stop = function () {
-  clearInterval(this.id);
+  if (this.id) {
+    clearInterval(this.id);
+  }
 };
