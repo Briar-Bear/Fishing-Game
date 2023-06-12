@@ -239,7 +239,10 @@ reelBtn.addEventListener('mousedown', () => {
   distanceTimerDecrement.stop();
 
   tensionTimer.start(game.currentFish.strength);
-  distanceTimer.start({ castDistance, fishName: game.currentFish.name });
+  distanceTimer.start({
+    castDistance: game.castDistance,
+    fishName: game.currentFish.name,
+  });
   console.log('reeling in!');
 });
 
