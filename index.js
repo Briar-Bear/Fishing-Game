@@ -229,7 +229,7 @@ const biteTimer = new Timer((rodDistance) => {
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
   game.getRod();
-  const cast = game.currentRod.cast();
+  const cast = game.currentRod.cast(); // keps saying NaN
 
   if (cast > 1) {
     biteTimer.start(cast);
