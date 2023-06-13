@@ -1,5 +1,5 @@
 // reset tension meter back to 0 when fish got away
-// something wrong on line 225
+// something wrong on line 226
 
 // Import stylesheets
 import './style.css';
@@ -12,11 +12,15 @@ import Meter from './Ui.js';
 
 const game = {
   currentFish: null,
+  currentRod: null,
   castDistance: 0,
   fish: [],
   rod: [],
   getFish() {
     this.currentFish = this.fish[Math.floor(Math.random() * this.fish.length)];
+  },
+  getRod() {
+    this.currentRod = this.rod[Math.floor(Math.random() * this.rod.length)];
   },
 };
 
@@ -214,6 +218,7 @@ const biteTimer = new Timer((rodDistance) => {
     biteTimer.stop();
 
     game.getFish();
+    game.getRod();
     game.castDistance = castDistance;
     console.log(game.currentFish);
   } else {
@@ -223,7 +228,8 @@ const biteTimer = new Timer((rodDistance) => {
 
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
-  const cast = game.rod.name.cast();
+  game.getRod();
+  const cast = game.currentRod.cast();
 
   if (cast > 1) {
     biteTimer.start(cast);
