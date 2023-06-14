@@ -26,109 +26,85 @@ const game = {
 
 // all fish data
 const fishData = [
-  [
-    {
-      name: 'Goldfish',
-      strength: 1,
-      points: 10,
-    },
-  ],
-  [
-    {
-      name: 'Perch',
-      strength: 3,
-      points: 30,
-    },
-  ],
-  [
-    {
-      name: 'Guppy',
-      strength: 4,
-      points: 20,
-    },
-  ],
-  [
-    {
-      name: 'Carp',
-      strength: 6,
-      points: 30,
-    },
-  ],
-  [
-    {
-      name: 'Bass',
-      strength: 6,
-      points: 60,
-    },
-  ],
-  [
-    {
-      name: 'Trout',
-      strength: 7,
-      points: 40,
-    },
-  ],
-  [
-    {
-      name: 'Pike',
-      strength: 8,
-      points: 50,
-    },
-  ],
-  [
-    {
-      name: 'Salmon',
-      strength: 8,
-      points: 70,
-    },
-  ],
-  [
-    {
-      name: 'Shark',
-      strength: 9,
-      points: 100,
-    },
-  ],
+  {
+    name: 'Goldfish',
+    strength: 1,
+    points: 10,
+  },
+  {
+    name: 'Perch',
+    strength: 3,
+    points: 30,
+  },
+  {
+    name: 'Guppy',
+    strength: 4,
+    points: 20,
+  },
+  {
+    name: 'Carp',
+    strength: 6,
+    points: 30,
+  },
+  {
+    name: 'Bass',
+    strength: 6,
+    points: 60,
+  },
+  {
+    name: 'Trout',
+    strength: 7,
+    points: 40,
+  },
+  {
+    name: 'Pike',
+    strength: 8,
+    points: 50,
+  },
+  {
+    name: 'Salmon',
+    strength: 8,
+    points: 70,
+  },
+  {
+    name: 'Shark',
+    strength: 9,
+    points: 100,
+  },
 ];
 
 for (let i = 0; i < fishData.length; i++) {
   const item = fishData[i];
 
-  game.fish.push(new Fish(...item));
+  game.fish.push(new Fish(item));
 }
 
 // all rod data
 const rodData = [
-  [
-    {
-      name: 'Poor Rod',
-      tension: 0,
-      distance: 0,
-      range: 10,
-    },
-  ],
-  [
-    {
-      name: 'Good Rod',
-      tension: 0,
-      distance: 0,
-      range: 10,
-    },
-  ],
-  [
-    {
-      name: 'Great Rod',
-      tension: 0,
-      distance: 0,
-      range: 10,
-    },
-  ],
+  {
+    name: 'Poor Rod',
+    tension: 0,
+    distance: 0,
+    range: 10,
+  },
+  {
+    name: 'Good Rod',
+    tension: 0,
+    distance: 0,
+    range: 10,
+  },
+  {
+    name: 'Great Rod',
+    tension: 0,
+    distance: 0,
+    range: 10,
+  },
 ];
 
 for (let i = 0; i < rodData.length; i++) {
   const rodItem = rodData[i];
 
-  game.rod.push(new Rod(...rodItem));
+  game.rod.push(new Rod(rodItem));
 }
 
 // buttons
@@ -218,7 +194,6 @@ const biteTimer = new Timer((rodDistance) => {
     biteTimer.stop();
 
     game.getFish();
-    game.getRod();
     game.castDistance = castDistance;
     console.log(game.currentFish);
   } else {

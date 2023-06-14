@@ -1,5 +1,5 @@
 // Rod function and prototypes
-export default function Rod(tension, distance, range) {
+export default function Rod({ tension, distance, range }) {
   this.tension = tension;
   this.distance = distance;
   this.range = range;
