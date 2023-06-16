@@ -24,6 +24,11 @@ const game = {
   },
 };
 
+const fishermanImg = document.createElement('img');
+fishermanImg.src = './imgs/fisherman.jpg';
+
+document.body.append(fishermanImg);
+
 // all fish data
 const fishData = [
   {
@@ -138,6 +143,12 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
     tensionMeter.fgHeight >= tensionMeter.bgHeight
   ) {
     distanceTimer.stop();
+
+    const caughtImg = document.createElement('img');
+    caughtImg.src = './imgs/fishCaught.jpg';
+
+    document.body.append(caughtImg);
+
     console.log('You caught a ' + fishName);
 
     reelBtn.disabled = true;
@@ -203,8 +214,13 @@ const biteTimer = new Timer((rodDistance) => {
 
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
+  const castImg = document.createElement('img');
+  castImg.src = './imgs/casting.jpg';
+
+  document.body.append(castImg);
+
   game.getRod();
-  const cast = game.currentRod.cast(); // keps saying NaN
+  const cast = game.currentRod.cast();
 
   if (cast > 1) {
     biteTimer.start(cast);
@@ -216,6 +232,11 @@ castBtn.addEventListener('click', () => {
 
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
+  const reelingImg = document.createElement('img');
+  reelingImg.src = './imgs/reelIn.jpg';
+
+  document.body.append(reelingImg);
+
   tensionTimerDecrement.stop();
   distanceTimerDecrement.stop();
 
