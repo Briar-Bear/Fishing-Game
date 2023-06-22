@@ -25,7 +25,7 @@ const game = {
 };
 
 const fishermanImg = document.createElement('img');
-fishermanImg.src = './imgs/fisherman.jpg';
+fishermanImg.src = 'https://unsplash.com/photos/6_HqvY1E7NI';
 
 document.body.append(fishermanImg);
 
