@@ -1,7 +1,5 @@
-// reset tension meter back to 0 when fish got away
-// something wrong on line 226
-
 // Import stylesheets
+import 'iconify-icon';
 import './style.css';
 import Fish from './Fish.js';
 import Rod from './Rod.js';
