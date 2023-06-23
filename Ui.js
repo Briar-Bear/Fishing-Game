@@ -18,7 +18,7 @@ export default function Meter({
   if (position === 'left') {
     this.fgWidth = 0;
   } else {
-    this.fgHeight = 0;
+    this.fgHeight = barHeight;
   }
 
   this.create();
@@ -33,7 +33,7 @@ Meter.prototype.create = function () {
   this.fg = foreground;
   this.view = background;
 
-  this.view.style.transform = 'rotate(180deg)';
+  // this.view.style.transform = 'rotate(180deg)';
 
   //bg (background) elements
   this.changeBgColor(this.bgColor);
@@ -53,7 +53,7 @@ Meter.prototype.changeBgColor = function (bgColor) {
 };
 
 Meter.prototype.changeBgWidth = function (barWidth) {
-  this.view.style.width = barWidth + 'px';
+  this.view.style.width = barWidth + '%';
 };
 
 Meter.prototype.changeBgHeight = function (barHeight) {
@@ -66,20 +66,20 @@ Meter.prototype.changeFgColor = function (fgColor) {
 };
 
 Meter.prototype.changeFgWidth = function (barWidth) {
-  this.fg.style.width = this.fgWidth + 'px';
+  this.fg.style.width = this.fgWidth + '%';
 };
 
 Meter.prototype.changeFgHeight = function (barHeight) {
   this.fg.style.height = this.fgHeight + 'px';
 };
 
-Meter.prototype.changeLength = function (barHeight) {
-  this.fgHeight += barHeight;
-  this.fg.style.height = this.fgHeight + 'px';
+Meter.prototype.changeLength = function (barWidth) {
+  this.fgWidth += barWidth;
+  this.fg.style.width = this.fgWidth + '%';
 };
 
 Meter.prototype.changePosition = function (position) {
   if (position === 'left') {
-    this.view.style.transform = 'translate(100px) rotate(270deg)';
+    // this.view.style.transform = 'translate(100px) rotate(270deg)';
   }
 };

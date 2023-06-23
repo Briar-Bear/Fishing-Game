@@ -117,8 +117,7 @@ const tensionMeter = new Meter({
 });
 
 const distanceMeter = new Meter({
-  barWidth: 50,
-  barHeight: 250,
+  barHeight: 50,
   fgColor: 'Green',
   position: 50,
 });
@@ -263,5 +262,14 @@ fishermanImg.src =
 const row = document.createElement('div');
 row.classList.add('row');
 row.append(fishermanImg, tensionMeter.view);
+
+// button icons
+const castIcon = document.createElement('iconify-icon');
+castIcon.icon = 'game-icons:boat-fishing';
+castBtn.append(castIcon);
+
+const reelIcon = document.createElement('iconify-icon');
+reelIcon.icon = 'twemoji:fishing-pole';
+reelBtn.append(reelIcon);
 
 document.body.append(row, castBtn, reelBtn, distanceMeter.view);
