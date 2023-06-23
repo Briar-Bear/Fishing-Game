@@ -255,9 +255,11 @@ row.append(fishermanImg, tensionMeter.view);
 const castIcon = document.createElement('iconify-icon');
 castIcon.icon = 'game-icons:boat-fishing';
 castBtn.append(castIcon);
+castBtn.classList.add('cast-button');
 
 const reelIcon = document.createElement('iconify-icon');
 reelIcon.icon = 'twemoji:fishing-pole';
 reelBtn.append(reelIcon);
+reelBtn.classList.add('reel-button');
 
 document.body.append(row, castBtn, reelBtn, distanceMeter.view);
