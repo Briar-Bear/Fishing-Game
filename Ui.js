@@ -10,7 +10,7 @@ export default function Meter({
   this.bgHeight = barHeight;
   this.bgWidth = barWidth;
   this.fgHeight = barHeight;
-  this.fgWidth = barWidth;
+  this.fgWidth = 0;
   this.position = position;
   this.view;
   this.fg;

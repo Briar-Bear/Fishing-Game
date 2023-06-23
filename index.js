@@ -7,6 +7,7 @@ import Timer from './Timer.js';
 import Meter from './Ui.js';
 
 // Global Variables
+const fishermanImg = document.createElement('img');
 
 const game = {
   currentFish: null,
@@ -131,15 +132,13 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
   distanceMeter.changeLength(castDistance * 2);
 
   if (
-    distanceMeter.fgHeight >= distanceMeter.bgHeight ||
-    tensionMeter.fgHeight >= tensionMeter.bgHeight
+    distanceMeter.fgWidth >= distanceMeter.bgWidth ||
+    tensionMeter.fgWidth >= tensionMeter.bgWidth
   ) {
     distanceTimer.stop();
 
-    const caughtImg = document.createElement('img');
-    caughtImg.src = './imgs/fishCaught.jpg';
-
-    document.body.append(caughtImg);
+    fishermanImg.src =
+      'https://source.unsplash.com/random/900×700/?' + fishName + ',fish,';
 
     console.log('You caught a ' + fishName);
 
@@ -152,7 +151,7 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
 const distanceTimerDecrement = new Timer((castDistance) => {
   distanceMeter.changeLength(-castDistance);
 
-  if (distanceMeter.fgHeight <= 0) {
+  if (distanceMeter.fgWidth <= 0) {
     distanceTimerDecrement.stop();
     console.log('Fish has got away!');
 
@@ -166,8 +165,8 @@ const tensionTimer = new Timer((fishStrength) => {
   tensionMeter.changeLength(fishStrength);
 
   if (
-    tensionMeter.fgHeight >= tensionMeter.bgHeight ||
-    distanceMeter.fgHeight >= distanceMeter.bgHeight
+    tensionMeter.fgWidth >= tensionMeter.bgWidth ||
+    distanceMeter.fgWidth >= distanceMeter.bgWidth
   ) {
     tensionTimer.stop();
     console.log('Line has Snapped');
@@ -181,7 +180,7 @@ const tensionTimer = new Timer((fishStrength) => {
 const tensionTimerDecrement = new Timer((fishStrength) => {
   tensionMeter.changeLength(-fishStrength * 2);
 
-  if (tensionMeter.fgHeight <= 0) {
+  if (tensionMeter.fgWidth <= 0) {
     tensionTimerDecrement.stop();
   }
 }, 500);
@@ -206,11 +205,6 @@ const biteTimer = new Timer((rodDistance) => {
 
 // event listeners to cast out the line
 castBtn.addEventListener('click', () => {
-  const castImg = document.createElement('img');
-  castImg.src = './imgs/casting.jpg';
-
-  document.body.append(castImg);
-
   game.getRod();
   const cast = game.currentRod.cast();
 
@@ -224,11 +218,6 @@ castBtn.addEventListener('click', () => {
 
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
-  const reelingImg = document.createElement('img');
-  reelingImg.src = './imgs/reelIn.jpg';
-
-  document.body.append(reelingImg);
-
   tensionTimerDecrement.stop();
   distanceTimerDecrement.stop();
 
@@ -254,7 +243,6 @@ reelBtn.disabled = true;
 castBtn.textContent = 'Cast Line';
 reelBtn.textContent = 'Reel In';
 
-const fishermanImg = document.createElement('img');
 fishermanImg.classList.add('fisherman');
 fishermanImg.src =
   'https://images.unsplash.com/photo-1529230117010-b6c436154f25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3907&q=80';
