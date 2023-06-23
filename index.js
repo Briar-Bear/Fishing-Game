@@ -24,12 +24,6 @@ const game = {
   },
 };
 
-const fishermanImg = document.createElement('img');
-fishermanImg.src =
-  'https://images.unsplash.com/photo-1529230117010-b6c436154f25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3907&q=80';
-
-document.body.append(fishermanImg);
-
 // all fish data
 const fishData = [
   {
@@ -263,4 +257,13 @@ reelBtn.disabled = true;
 castBtn.textContent = 'Cast Line';
 reelBtn.textContent = 'Reel In';
 
-document.body.append(castBtn, reelBtn, tensionMeter.view, distanceMeter.view);
+const fishermanImg = document.createElement('img');
+fishermanImg.classList.add('fisherman');
+fishermanImg.src =
+  'https://images.unsplash.com/photo-1529230117010-b6c436154f25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3907&q=80';
+
+const row = document.createElement('div');
+row.classList.add('row');
+row.append(fishermanImg, tensionMeter.view);
+
+document.body.append(row, castBtn, reelBtn, distanceMeter.view);
