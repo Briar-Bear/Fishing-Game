@@ -25,7 +25,8 @@ const game = {
 };
 
 const fishermanImg = document.createElement('img');
-fishermanImg.src = 'https://unsplash.com/photos/6_HqvY1E7NI';
+fishermanImg.src =
+  'https://images.unsplash.com/photo-1529230117010-b6c436154f25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3907&q=80';
 
 document.body.append(fishermanImg);
 
