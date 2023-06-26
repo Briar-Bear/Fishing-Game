@@ -117,13 +117,16 @@ const tensionMeter = new Meter({
   fgColor: 'blue',
 });
 
+const distanceBox = document.createElement('div');
+distanceBox.classList.add('distanceBox');
+
 const distanceMeter = new Meter({
   barHeight: 50,
   fgColor: 'Green',
   position: 50,
-  background: url(https://streak.club/img/Mix1c2VyX2NvbnRlbnQvdXBsb2Fkcy9pbWFnZS82OTAzLmdpZg==/original/LEVk19.gif) repeat
 });
 
+distanceBox.append(distanceMeter.view);
 distanceMeter.changePosition('left');
 
 // timer functions
@@ -267,4 +270,4 @@ reelIcon.icon = 'twemoji:fishing-pole';
 reelBtn.append(reelIcon);
 reelBtn.classList.add('reel-button');
 
-document.body.append(row, btnContainer, distanceMeter.view);
+document.body.append(row, btnContainer, distanceBox);
