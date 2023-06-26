@@ -112,6 +112,7 @@ const reelBtn = document.createElement('button');
 
 // bind new functions
 const tensionMeter = new Meter({
+  barWidth: 15,
   barHeight: 250,
   fgColor: 'blue',
 });
@@ -120,6 +121,7 @@ const distanceMeter = new Meter({
   barHeight: 50,
   fgColor: 'Green',
   position: 50,
+  background: url(https://streak.club/img/Mix1c2VyX2NvbnRlbnQvdXBsb2Fkcy9pbWFnZS82OTAzLmdpZg==/original/LEVk19.gif) repeat
 });
 
 distanceMeter.changePosition('left');
