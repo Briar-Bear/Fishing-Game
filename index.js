@@ -112,7 +112,6 @@ const reelBtn = document.createElement('button');
 
 // bind new functions
 const tensionMeter = new Meter({
-  barWidth: 50,
   barHeight: 250,
   fgColor: 'blue',
 });
