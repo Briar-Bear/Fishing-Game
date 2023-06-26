@@ -77,9 +77,14 @@ Meter.prototype.changeFgHeight = function (barHeight) {
   this.fg.style.height = this.fgHeight + this.heightUnit;
 };
 
-Meter.prototype.changeLength = function (barWidth) {
-  this.fgWidth += barWidth;
-  this.fg.style.width = this.fgWidth + this.widthUnit;
+Meter.prototype.changeLength = function (barNumber) {
+  if (this.posotion !== 'left') {
+    this.fgWidth += barNumber;
+    this.fg.style.width = this.fgWidth + this.widthUnit;
+  } else {
+    this.fgHeight += barNumber;
+    this.fg.style.height = this.fgHeight + this.heightUnit;
+  }
 };
 
 Meter.prototype.changePosition = function (position) {

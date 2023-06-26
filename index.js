@@ -132,7 +132,7 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
 
   if (
     distanceMeter.fgWidth >= distanceMeter.bgWidth ||
-    tensionMeter.fgWidth >= tensionMeter.bgWidth
+    tensionMeter.fgHeight >= tensionMeter.bgHeight
   ) {
     distanceTimer.stop();
 
@@ -164,7 +164,7 @@ const tensionTimer = new Timer((fishStrength) => {
   tensionMeter.changeLength(fishStrength);
 
   if (
-    tensionMeter.fgWidth >= tensionMeter.bgWidth ||
+    tensionMeter.fgHeight >= tensionMeter.bgHeight ||
     distanceMeter.fgWidth >= distanceMeter.bgWidth
   ) {
     tensionTimer.stop();
@@ -179,7 +179,7 @@ const tensionTimer = new Timer((fishStrength) => {
 const tensionTimerDecrement = new Timer((fishStrength) => {
   tensionMeter.changeLength(-fishStrength * 2);
 
-  if (tensionMeter.fgWidth <= 0) {
+  if (tensionMeter.fgHeight <= 0) {
     tensionTimerDecrement.stop();
   }
 }, 500);
