@@ -1,6 +1,8 @@
 export default function Meter({
   bgColor = 'black',
   fgColor = 'blue',
+  bgImageUrl = '',
+  fgImageUrl = '',
   barHeight = 50,
   barWidth = 100,
   position,
@@ -26,6 +28,14 @@ export default function Meter({
   }
 
   this.create();
+
+  if (bgImageUrl) {
+    this.changeBgImg(bgImageUrl);
+  }
+
+  if (fgImageUrl) {
+    this.changeFgImg(fgImageUrl);
+  }
 }
 
 Meter.prototype.create = function () {
@@ -56,6 +66,11 @@ Meter.prototype.changeBgColor = function (bgColor) {
   this.view.style.backgroundColor = bgColor;
 };
 
+Meter.prototype.changeBgImg = function (bgImageUrl) {
+  this.view.style.backgroundImage = 'url(' + bgImageUrl + ')';
+  this.view.style.backgroundSize = 'contain';
+};
+
 Meter.prototype.changeBgWidth = function (barWidth) {
   this.view.style.width = barWidth + this.widthUnit;
 };
@@ -67,6 +82,11 @@ Meter.prototype.changeBgHeight = function (barHeight) {
 // fg (foreground) prototypes
 Meter.prototype.changeFgColor = function (fgColor) {
   this.fg.style.backgroundColor = fgColor;
+};
+
+Meter.prototype.changeFgImg = function (fgImageUrl) {
+  this.view.style.backgroundImage = 'url(' + fgImageUrl + ')';
+  this.view.style.backgroundSize = 'contain';
 };
 
 Meter.prototype.changeFgWidth = function (barWidth) {
