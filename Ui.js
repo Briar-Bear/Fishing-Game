@@ -87,6 +87,7 @@ Meter.prototype.changeFgColor = function (fgColor) {
 Meter.prototype.changeFgImg = function (fgImageUrl) {
   this.view.style.backgroundImage = 'url(' + fgImageUrl + ')';
   this.view.style.backgroundSize = 50 + 'px';
+  this.view.style.backgroundRepeat = 'no-repeat';
 };
 
 Meter.prototype.changeFgWidth = function (barWidth) {
