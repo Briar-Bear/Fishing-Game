@@ -112,9 +112,10 @@ const reelBtn = document.createElement('button');
 
 // bind new functions
 const tensionMeter = new Meter({
-  barWidth: 15,
-  barHeight: 250,
+  barWidth: 50,
+  barHeight: 100,
   fgColor: 'blue',
+  position: 'vertical',
 });
 
 const distanceMeter = new Meter({
@@ -125,18 +126,13 @@ const distanceMeter = new Meter({
   position: 50,
 });
 
-distanceMeter.changePosition('left');
-
 // timer functions
 
 // a timer to increase the progress bar of the distanceMeter
 const distanceTimer = new Timer(({ castDistance, fishName }) => {
   distanceMeter.changeLength(castDistance * 2);
 
-  if (
-    distanceMeter.fgWidth >= distanceMeter.bgWidth ||
-    tensionMeter.fgHeight >= tensionMeter.bgHeight
-  ) {
+  if (distanceMeter.fgWidth >= distanceMeter.bgWidth) {
     distanceTimer.stop();
 
     fishermanImg.src =

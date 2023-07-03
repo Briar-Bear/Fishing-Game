@@ -1,6 +1,6 @@
 export default function Meter({
   bgColor = 'black',
-  fgColor = 'blue',
+  fgColor = '',
   bgImageUrl = '',
   fgImageUrl = '',
   barHeight = 50,
@@ -19,10 +19,12 @@ export default function Meter({
   this.heightUnit = 'px';
   this.widthUnit = '%';
 
-  if (position === 'verticle') {
+  if (position === 'vertical') {
     this.fgHeight = 0;
+    this.fgWidth = barWidth;
     this.heightUnit = '%';
     this.widthUnit = 'px';
+    this.bgHeight = 'auto';
   } else {
     this.fgHeight = barHeight;
   }
@@ -47,7 +49,11 @@ Meter.prototype.create = function () {
   this.fg = foreground;
   this.view = background;
 
-  // this.view.style.transform = 'rotate(180deg)';
+  if (this.position === 'vertical') {
+    this.view.style.display = 'flex';
+    this.view.style.flexDirection = 'column-reverse';
+    this.view.style.flexShrink = '0';
+  }
 
   //bg (background) elements
   this.changeBgColor(this.bgColor);
@@ -88,6 +94,7 @@ Meter.prototype.changeFgImg = function (fgImageUrl) {
   this.fg.style.backgroundImage = 'url(' + fgImageUrl + ')';
   this.fg.style.backgroundSize = 50 + 'px';
   this.fg.style.backgroundRepeat = 'no-repeat';
+  this.fg.style.backgroundPositionX = 'right';
 };
 
 Meter.prototype.changeFgWidth = function (barWidth) {
@@ -102,17 +109,18 @@ Meter.prototype.changeLength = function (barNumber) {
   if (barNumber > 100) {
     barNumber = 100;
   }
-  if (this.position === 'verticle') {
-    this.fgWidth += barNumber;
-    this.fg.style.width = this.fgWidth + this.widthUnit;
-  } else {
+
+  if (this.position === 'vertical') {
     this.fgHeight += barNumber;
     this.fg.style.height = this.fgHeight + this.heightUnit;
+  } else {
+    this.fgWidth += barNumber;
+    this.fg.style.width = this.fgWidth + this.widthUnit;
   }
 };
 
 Meter.prototype.changePosition = function (position) {
-  if (position === 'verticle') {
+  if (position === 'vertical') {
     // this.view.style.transform = 'translate(100px) rotate(270deg)';
   }
 };
