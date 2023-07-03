@@ -132,8 +132,9 @@ const distanceMeter = new Meter({
 const distanceTimer = new Timer(({ castDistance, fishName }) => {
   distanceMeter.changeLength(castDistance * 2);
 
-  if (distanceMeter.fgWidth >= distanceMeter.bgWidth) {
+  if (distanceMeter.fgWidth >= 100) {
     distanceTimer.stop();
+    tensionTimer.stop();
 
     fishermanImg.src =
       'https://source.unsplash.com/random/900×700/?' + fishName + ',fish,';
@@ -162,11 +163,9 @@ const distanceTimerDecrement = new Timer((castDistance) => {
 const tensionTimer = new Timer((fishStrength) => {
   tensionMeter.changeLength(fishStrength);
 
-  if (
-    tensionMeter.fgHeight >= tensionMeter.bgHeight ||
-    distanceMeter.fgWidth >= distanceMeter.bgWidth
-  ) {
+  if (tensionMeter.fgHeight >= 100) {
     tensionTimer.stop();
+    distanceTimer.stop();
     console.log('Line has Snapped');
 
     reelBtn.disabled = true;
