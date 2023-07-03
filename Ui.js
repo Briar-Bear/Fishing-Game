@@ -119,6 +119,12 @@ Meter.prototype.changeLength = function (barNumber) {
   }
 };
 
+Meter.prototype.barReset = function (barNumber) {
+  if (barNumber >= 100) {
+    barNumber = 0;
+  }
+};
+
 Meter.prototype.changePosition = function (position) {
   if (position === 'vertical') {
     // this.view.style.transform = 'translate(100px) rotate(270deg)';
