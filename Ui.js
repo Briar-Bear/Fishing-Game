@@ -19,8 +19,8 @@ export default function Meter({
   this.heightUnit = 'px';
   this.widthUnit = '%';
 
-  if (position === 'left') {
-    this.fgWidth = 0;
+  if (position === 'verticle') {
+    this.fgHeight = 0;
     this.heightUnit = '%';
     this.widthUnit = 'px';
   } else {
@@ -85,9 +85,9 @@ Meter.prototype.changeFgColor = function (fgColor) {
 };
 
 Meter.prototype.changeFgImg = function (fgImageUrl) {
-  this.view.style.backgroundImage = 'url(' + fgImageUrl + ')';
-  this.view.style.backgroundSize = 50 + 'px';
-  this.view.style.backgroundRepeat = 'no-repeat';
+  this.fg.style.backgroundImage = 'url(' + fgImageUrl + ')';
+  this.fg.style.backgroundSize = 50 + 'px';
+  this.fg.style.backgroundRepeat = 'no-repeat';
 };
 
 Meter.prototype.changeFgWidth = function (barWidth) {
@@ -99,7 +99,10 @@ Meter.prototype.changeFgHeight = function (barHeight) {
 };
 
 Meter.prototype.changeLength = function (barNumber) {
-  if (this.posotion !== 'left') {
+  if (barNumber > 100) {
+    barNumber = 100;
+  }
+  if (this.position === 'verticle') {
     this.fgWidth += barNumber;
     this.fg.style.width = this.fgWidth + this.widthUnit;
   } else {
@@ -109,7 +112,7 @@ Meter.prototype.changeLength = function (barNumber) {
 };
 
 Meter.prototype.changePosition = function (position) {
-  if (position === 'left') {
+  if (position === 'verticle') {
     // this.view.style.transform = 'translate(100px) rotate(270deg)';
   }
 };

@@ -121,8 +121,7 @@ const distanceMeter = new Meter({
   barHeight: 50,
   bgImageUrl:
     'https://streak.club/img/Mix1c2VyX2NvbnRlbnQvdXBsb2Fkcy9pbWFnZS82OTAzLmdpZg==/original/LEVk19.gif',
-  fgImageUrl:
-    'https://66.media.tumblr.com/28bc44b5eed41b8a0b7829231bd684ad/tumblr_mszoapVuPz1rfjowdo1_500.gif',
+  fgImageUrl: 'https://i.imgur.com/QXAla8u.gif',
   position: 50,
 });
 
