@@ -141,8 +141,8 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
 
     console.log('You caught a ' + fishName);
 
-    tensionMeter.changeLength(0);
-    distanceMeter.changeLength(0);
+    tensionMeter.barReset();
+    distanceMeter.barReset();
 
     reelBtn.disabled = true;
     castBtn.disabled = false;
@@ -158,8 +158,8 @@ const distanceTimerDecrement = new Timer((castDistance) => {
     tensionTimerDecrement.stop();
     console.log('Fish has got away!');
 
-    tensionMeter.changeLength(0);
-    distanceMeter.changeLength(0);
+    tensionMeter.barReset();
+    distanceMeter.barReset();
 
     reelBtn.disabled = true;
     castBtn.disabled = false;
@@ -174,8 +174,8 @@ const tensionTimer = new Timer((fishStrength) => {
     tensionTimer.stop();
     distanceTimer.stop();
     console.log('Line has Snapped');
-    tensionMeter.changeLength(0);
-    distanceMeter.changeLength(0);
+    tensionMeter.barReset();
+    distanceMeter.barReset();
 
     reelBtn.disabled = true;
     castBtn.disabled = false;

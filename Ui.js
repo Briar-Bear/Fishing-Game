@@ -119,9 +119,15 @@ Meter.prototype.changeLength = function (barNumber) {
   }
 };
 
-Meter.prototype.barReset = function (barNumber) {
-  if (barNumber >= 100) {
-    barNumber = 0;
+Meter.prototype.barReset = function () {
+  const barNumber = 0;
+
+  if (this.position === 'vertical') {
+    this.fgHeight = barNumber;
+    this.fg.style.height = this.fgHeight + this.heightUnit;
+  } else {
+    this.fgWidth = barNumber;
+    this.fg.style.width = this.fgWidth + this.widthUnit;
   }
 };
 
