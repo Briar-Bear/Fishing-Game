@@ -28,52 +28,65 @@ const game = {
   },
 };
 
+// inventory
+
+const inventory = [];
+
 // all fish data
 const fishData = [
   {
     name: 'Goldfish',
     strength: 1,
     points: 10,
+    value: 1,
   },
   {
     name: 'Perch',
     strength: 3,
     points: 30,
+    value: 2,
   },
   {
     name: 'Guppy',
     strength: 4,
     points: 20,
+    value: 2,
   },
   {
     name: 'Carp',
     strength: 6,
     points: 30,
+    value: 2,
   },
   {
     name: 'Bass',
     strength: 6,
     points: 60,
+    value: 3,
   },
   {
     name: 'Trout',
     strength: 7,
     points: 40,
+    value: 3,
   },
   {
     name: 'Pike',
     strength: 8,
     points: 50,
+    value: 5,
   },
   {
     name: 'Salmon',
     strength: 8,
     points: 70,
+    value: 6,
   },
   {
     name: 'Shark',
     strength: 9,
     points: 100,
+    value: 9,
   },
 ];
 
@@ -98,10 +111,11 @@ const shopData = [
   },
   {
     stock: 'Fishing Boat',
-    value: 10000,
+    value: 100,
   },
 ];
 
+// for loops
 for (let i = 0; i < fishData.length; i++) {
   const item = fishData[i];
 
@@ -171,6 +185,11 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
       'https://source.unsplash.com/random/900×700/?' + fishName + ',fish,';
 
     console.log('You caught a ' + fishName);
+
+    // putting the fish into the inventory
+    inventory.push(fishName);
+
+    console.log(inventory);
 
     tensionMeter.barReset();
     distanceMeter.barReset();
