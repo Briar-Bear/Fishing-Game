@@ -1,10 +1,15 @@
-// Import stylesheets
+// make the fish fight back and you cant reel in during that period
+// add a shop
+// add an aquarium
+// add a catch or release system
+// add money to spend at the shop
 import 'iconify-icon';
 import './style.css';
 import Fish from './Fish.js';
 import Rod from './Rod.js';
 import Timer from './Timer.js';
 import Meter from './Ui.js';
+import Shop from './Shop.js';
 
 // Global Variables
 const fishermanImg = document.createElement('img');
@@ -72,6 +77,31 @@ const fishData = [
   },
 ];
 
+// shop data
+
+const shopData = [
+  {
+    stock: 'Small Rod',
+    value: 5,
+  },
+  {
+    stock: 'Medium Rod',
+    value: 10,
+  },
+  {
+    stock: 'Big Rod',
+    value: 15,
+  },
+  {
+    stock: 'Can of Worms',
+    value: 2,
+  },
+  {
+    stock: 'Fishing Boat',
+    value: 10000,
+  },
+];
+
 for (let i = 0; i < fishData.length; i++) {
   const item = fishData[i];
 
@@ -109,6 +139,7 @@ for (let i = 0; i < rodData.length; i++) {
 // buttons
 const castBtn = document.createElement('button');
 const reelBtn = document.createElement('button');
+const shopBtn = document.createElement('button');
 
 // bind new functions
 const tensionMeter = new Meter({
@@ -222,6 +253,22 @@ castBtn.addEventListener('click', () => {
   }
 });
 
+//event listener that grants access to the shop
+shopBtn.addEventListener('click', () => {
+  // removing elements - will make something better
+  document.body.innerHTML = '';
+  // A button to buy items in shop
+  const buyBtn = document.createElement('button');
+  buyBtn.textContent = 'Purchase';
+  // A button to sell to the shop
+  const sellBtn = document.createElement('button');
+  sellBtn.textContent = 'Sell';
+  // Appending shop buttons
+  document.body.append(buyBtn, sellBtn);
+});
+
+shopBtn.textContent = 'Shop';
+
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
   tensionTimerDecrement.stop();
@@ -260,7 +307,7 @@ row.append(fishermanImg, tensionMeter.view);
 // button icons
 const btnContainer = document.createElement('div');
 btnContainer.classList.add('btnContainer');
-btnContainer.append(castBtn, reelBtn);
+btnContainer.append(castBtn, reelBtn, shopBtn);
 
 const castIcon = document.createElement('iconify-icon');
 castIcon.icon = 'game-icons:boat-fishing';
@@ -271,5 +318,10 @@ const reelIcon = document.createElement('iconify-icon');
 reelIcon.icon = 'twemoji:fishing-pole';
 reelBtn.append(reelIcon);
 reelBtn.classList.add('reel-button');
+
+const shopIcon = document.createElement('iconify-icon');
+shopIcon.icon = 'twemoji:coin';
+shopBtn.append(shopIcon);
+shopBtn.classList.add('shop-button');
 
 document.body.append(row, btnContainer, distanceMeter.view);
