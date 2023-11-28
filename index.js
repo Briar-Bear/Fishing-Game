@@ -10,6 +10,7 @@ import Rod from './Rod.js';
 import Timer from './Timer.js';
 import Meter from './Ui.js';
 import Shop from './Shop.js';
+import FishTank from './Aquarium.js';
 
 // Global Variables
 const fishermanImg = document.createElement('img');
@@ -28,9 +29,10 @@ const game = {
   },
 };
 
-// inventory
+// global arrays
 
-const inventory = [];
+let inventory = [];
+const fishNet = [];
 
 // all fish data
 const fishData = [
@@ -154,6 +156,10 @@ for (let i = 0; i < rodData.length; i++) {
 const castBtn = document.createElement('button');
 const reelBtn = document.createElement('button');
 const shopBtn = document.createElement('button');
+const keepBtn = document.createElement('button');
+const releaseBtn = document.createElement('button');
+
+// fish tank
 
 // bind new functions
 const tensionMeter = new Meter({
@@ -196,6 +202,8 @@ const distanceTimer = new Timer(({ castDistance, fishName }) => {
 
     reelBtn.disabled = true;
     castBtn.disabled = false;
+    keepBtn.hidden = false;
+    releaseBtn.hidden = false;
   }
 }, 500);
 
@@ -287,6 +295,12 @@ shopBtn.addEventListener('click', () => {
 });
 
 shopBtn.textContent = 'Shop';
+keepBtn.textContent = 'Keep?';
+releaseBtn.textContent = 'Release?';
+
+// hiding buttons
+keepBtn.hidden = true;
+releaseBtn.hidden = true;
 
 // event listeners to reel in the fish
 reelBtn.addEventListener('mousedown', () => {
@@ -310,6 +324,19 @@ reelBtn.addEventListener('mouseup', () => {
   distanceTimerDecrement.start(game.castDistance);
 });
 
+// event listeners to keep or release the fish
+keepBtn.addEventListener('click', () => {
+  fishNet.push(inventory);
+  inventory = [];
+  console.log('you put the fish into your fish tank!');
+  console.log(fishNet);
+});
+
+releaseBtn.addEventListener('click', () => {
+  inventory = [];
+  console.log('you released the fish!');
+});
+
 reelBtn.disabled = true;
 
 castBtn.textContent = 'Cast Line';
@@ -326,7 +353,7 @@ row.append(fishermanImg, tensionMeter.view);
 // button icons
 const btnContainer = document.createElement('div');
 btnContainer.classList.add('btnContainer');
-btnContainer.append(castBtn, reelBtn, shopBtn);
+btnContainer.append(castBtn, reelBtn, shopBtn, keepBtn, releaseBtn);
 
 const castIcon = document.createElement('iconify-icon');
 castIcon.icon = 'game-icons:boat-fishing';
